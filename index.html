@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arpana &amp; Abhishek — Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg-mandala" aria-hidden="true"></div>
+<div id="petals" aria-hidden="true"></div>
+
+<!-- PAGE 1: INTRO -->
+<section class="page active" id="intro">
+  <img class="corner tl" src="assets/floral.png" alt=""><img class="corner br" src="assets/floral.png" alt="">
+  <div class="frame stack">
+    <p class="small rise d1">Together with their families</p>
+    <h1 class="names rise d2"><span id="introBride"></span><em>and</em><span id="introGroom"></span></h1>
+    <div class="divider rise d3"><i></i></div>
+    <div class="parents rise d4">
+      <p><b id="brideName2"></b><br><span id="brideParents"></span></p>
+      <p><b id="groomName2"></b><br><span id="groomParents"></span></p>
+    </div>
+    <button class="btn rise d5" data-go="choose">Enter Invitation</button>
+  </div>
+</section>
+
+<!-- PAGE 2: CHOOSE -->
+<section class="page" id="choose">
+  <div class="frame stack">
+    <h2 class="title">Choose Your Celebration</h2>
+    <div class="divider"><i></i></div>
+    <div class="cards">
+      <button class="side-card" data-side="groom">
+        <img src="assets/groom.jpg" alt="Groom's side"><!-- REPLACE: assets/groom.jpg -->
+        <span class="label">Groom's Side</span>
+      </button>
+      <button class="side-card" data-side="bride">
+        <img src="assets/bride.jpg" alt="Bride's side"><!-- REPLACE: assets/bride.jpg -->
+        <span class="label">Bride's Side</span>
+      </button>
+    </div>
+    <button class="btn ghost" data-go="intro">Back</button>
+  </div>
+</section>
+
+<!-- PAGE 3: EVENTS -->
+<section class="page" id="events">
+  <div class="frame stack">
+    <h2 class="title" id="eventsTitle"></h2>
+    <div class="divider"><i></i></div>
+    <div class="timeline" id="timeline"></div>
+    <div class="row">
+      <button class="btn ghost" data-go="choose">Back</button>
+      <button class="btn" data-go="wedding">The Wedding</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4: WEDDING -->
+<section class="page" id="wedding">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="ring" aria-hidden="true"></div>
+  <div id="sparkles" aria-hidden="true"></div>
+  <div class="frame stack grand">
+    <p class="small rise d1"><span class="diya">🪔</span> The Wedding <span class="diya">🪔</span></p>
+    <div class="couple-frame rise d2">
+      <img src="assets/couple.jpg" alt="Arpana and Abhishek"><!-- REPLACE: assets/couple.jpg -->
+    </div>
+    <h2 class="names big rise d3"><span id="wedBride"></span><em>&amp;</em><span id="wedGroom"></span></h2>
+    <div class="divider rise d4"><i></i></div>
+    <p class="date rise d4" id="wedDate"></p>
+    <p class="small rise d5" id="wedTime"></p>
+    <address class="venue rise d5" id="wedVenue"></address>
+    <div id="countdown" class="countdown rise d5" role="timer" aria-label="Countdown to the wedding"></div>
+    <p class="invite small rise d6" id="inviteLine"></p>
+    <blockquote class="quote rise d6" id="quote"></blockquote>
+    <div class="row rise d6">
+      <button class="btn ghost" data-go="events">Back</button>
+      <a class="btn" id="mapBtn" target="_blank" rel="noopener">View Location</a>
+    </div>
+  </div>
+</section>
+
+<!-- REPLACE: assets/song.mp3 (background music) -->
+<audio id="bgm" src="assets/song.mp3" loop preload="auto"></audio>
+<button id="musicBtn" class="music" aria-label="Mute or play music" aria-pressed="true"><span class="bars"><i></i><i></i><i></i></span></button>
+<div id="confetti" aria-hidden="true"></div>
+<script src="script.js"></script>
+</body>
+</html>

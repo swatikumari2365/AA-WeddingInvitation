@@ -1,0 +1,161 @@
+/* ====== THEME — edit colours here ====== */
+:root{
+  --ivory:#fbf4e6; --cream:#f3e7cf; --maroon:#6b1523; --maroon2:#8a2434;
+  --gold:#b08d3c; --gold-soft:#d9c288; --ink:#3d2a25;
+  --serif:'Cormorant Garamond',Georgia,serif; --script:'Pinyon Script','Cormorant Garamond',cursive;
+  --sans:'Jost',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{height:100%;overflow:hidden;background:var(--ivory)}
+body{font-family:var(--sans);color:var(--ink);font-size:clamp(15px,2.2vw,17px);line-height:1.6;
+  background:radial-gradient(circle at 50% 0,#fffaf0,var(--ivory) 55%,var(--cream));}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* background (replace assets/mandala.png / wedding-bg.jpg) */
+.bg-mandala{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.12;
+  background:url(assets/wedding-bg.jpg) center/cover,url(assets/mandala.png) center/min(120vw,900px) no-repeat}
+.bg-mandala::after{content:"";position:absolute;inset:-20%;background:url(assets/mandala.png) center/min(130vw,950px) no-repeat;
+  animation:spin 180s linear infinite;opacity:.9}
+@keyframes spin{to{transform:rotate(360deg)}}
+#petals{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.petal{position:absolute;top:-30px;width:12px;height:16px;border-radius:70% 0 70% 0;
+  background:linear-gradient(135deg,#c24a5c,#8a2434);opacity:.55;animation:fall linear infinite}
+.petal.gold{background:linear-gradient(135deg,#e6cf8e,#b08d3c)}
+@keyframes fall{to{transform:translate3d(var(--dx),110vh,0) rotate(540deg)}}
+
+/* pages */
+.page{position:fixed;inset:0;z-index:2;overflow-y:auto;overflow-x:hidden;display:flex;
+  padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));
+  opacity:0;visibility:hidden;transform:scale(1.03);transition:opacity .8s ease,transform .9s ease,visibility .8s}
+.page.active{opacity:1;visibility:visible;transform:none}
+.page.leaving{opacity:0;transform:scale(.97)}
+.frame{margin:auto;width:min(100%,720px);padding:clamp(28px,6vw,56px) clamp(18px,5vw,48px);position:relative;text-align:center;
+  border:1px solid var(--gold);border-radius:22px;background:rgba(255,250,240,.78);backdrop-filter:blur(3px);
+  box-shadow:0 0 0 6px rgba(251,244,230,.9),0 0 0 7px var(--gold-soft),0 20px 50px rgba(107,21,35,.12)}
+.stack{display:flex;flex-direction:column;align-items:center;gap:clamp(12px,2.5vh,22px)}
+.corner{position:absolute;width:clamp(110px,24vw,230px);opacity:.9;pointer-events:none}
+.corner.tl{top:0;left:0}.corner.br{bottom:0;right:0;transform:rotate(180deg)}
+
+/* type */
+.small{font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.names{font-family:var(--script);font-weight:400;color:var(--maroon);line-height:1.05;font-size:clamp(3rem,13vw,5.5rem);
+  display:flex;flex-direction:column;align-items:center}
+.names em{font-family:var(--serif);font-size:1.2rem;color:var(--gold);margin:.3rem 0}
+.names.big{font-size:clamp(3.2rem,15vw,6.5rem)}
+.title{font-family:var(--serif);font-weight:600;color:var(--maroon);font-size:clamp(1.9rem,7vw,3rem);line-height:1.15}
+.parents{display:grid;grid-template-columns:1fr 1fr;gap:20px;font-family:var(--serif);font-size:1.12rem;width:100%}
+.parents b{color:var(--maroon);font-size:1.3rem;font-weight:600}
+.parents span{font-style:italic;text-wrap:balance}
+.pn{white-space:nowrap}
+.date{font-family:var(--serif);font-size:clamp(1.6rem,6vw,2.4rem);color:var(--maroon)}
+.venue{font-style:normal;font-family:var(--serif);font-size:1.25rem}
+.divider{width:min(240px,70%);height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);position:relative}
+.divider i{position:absolute;left:50%;top:50%;width:10px;height:10px;background:var(--gold);transform:translate(-50%,-50%) rotate(45deg);outline:4px solid var(--ivory)}
+
+/* buttons */
+.row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.btn{position:relative;overflow:hidden;display:inline-block;padding:.85em 2em;border-radius:999px;text-decoration:none;
+  background:linear-gradient(135deg,var(--maroon),var(--maroon2));color:#fbeed0;letter-spacing:.12em;font-size:.9rem;
+  border:1px solid var(--gold);box-shadow:0 6px 18px rgba(107,21,35,.25);transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 0 3px rgba(176,141,60,.25),0 10px 24px rgba(107,21,35,.3)}
+.btn.ghost{background:transparent;color:var(--maroon);box-shadow:none}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.4);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(3);opacity:0}}
+
+/* intro entrance: one orchestrated sequence */
+.rise{opacity:0;transform:translateY(18px)}
+.active .rise{animation:rise 1s ease forwards}
+.d1{animation-delay:.3s!important}.d2{animation-delay:.8s!important}.d3{animation-delay:1.3s!important}
+.d4{animation-delay:1.7s!important}.d5{animation-delay:2.1s!important}.d6{animation-delay:2.5s!important}
+@keyframes rise{to{opacity:1;transform:none}}
+#intro .frame{animation:zoom 14s ease-out both}
+@keyframes zoom{from{transform:scale(.96)}to{transform:scale(1)}}
+
+/* choose cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,3vw,24px);width:100%}
+.side-card{position:relative;overflow:hidden;aspect-ratio:3/4;border-radius:120px 120px 16px 16px;border:1px solid var(--gold);
+  outline:5px solid var(--ivory);box-shadow:0 0 0 6px var(--gold-soft);transition:transform .5s,box-shadow .5s}
+.side-card img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s;object-position:center 20%}
+.side-card::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(107,21,35,.85))}
+.side-card .label{position:absolute;z-index:1;left:8px;right:8px;bottom:14px;font-family:var(--serif);font-size:clamp(1.05rem,4.2vw,1.6rem);
+  color:#fbeed0;letter-spacing:.1em;text-transform:uppercase}
+.side-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 0 0 6px var(--gold),0 0 40px rgba(176,141,60,.55)}
+.side-card:hover img{transform:scale(1.1)}
+
+/* timeline — bride: centre spine, groom: left spine */
+.timeline{position:relative;width:100%;display:flex;flex-direction:column;gap:18px;text-align:left;padding:6px 0}
+.timeline::before{content:"";position:absolute;top:0;bottom:0;width:1px;background:var(--gold);left:50%}
+.ev{position:relative;width:calc(50% - 22px);padding:16px 18px;border-radius:16px;background:#fffaf0;border:1px solid var(--gold-soft);
+  box-shadow:0 8px 22px rgba(107,21,35,.08);opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.ev.show{opacity:1;transform:none}
+.ev:nth-child(even){align-self:flex-end}
+.ev::after{content:"";position:absolute;top:24px;width:11px;height:11px;background:var(--maroon);transform:rotate(45deg);border:2px solid var(--gold);right:-28px}
+.ev:nth-child(even)::after{right:auto;left:-28px}
+.ev .ico{font-size:1.5rem;line-height:1}
+.ev .d{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.ev h3{font-family:var(--serif);font-size:1.6rem;color:var(--maroon);line-height:1.2;margin:2px 0}
+.ev p{font-size:.95rem}
+.timeline.groom::before{left:14px}
+.timeline.groom .ev{width:calc(100% - 44px);align-self:flex-end;border-radius:4px 22px 4px 22px;border-left:4px solid var(--maroon)}
+.timeline.groom .ev::after,.timeline.groom .ev:nth-child(even)::after{left:-36px;right:auto}
+@media(max-width:560px){
+  .timeline::before{left:12px}
+  .ev,.ev:nth-child(even){width:calc(100% - 38px);align-self:flex-end}
+  .ev::after,.ev:nth-child(even)::after{left:-32px;right:auto}
+  .timeline.groom .ev{width:calc(100% - 38px)}
+  .parents{grid-template-columns:1fr}
+}
+
+/* wedding page */
+.glow{position:absolute;top:8%;left:50%;width:min(110vw,700px);aspect-ratio:1;transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(230,200,120,.55),transparent 65%);animation:pulse 5s ease-in-out infinite;pointer-events:none}
+@keyframes pulse{50%{opacity:.5;transform:translateX(-50%) scale(1.08)}}
+.grand{border-width:2px}
+.couple-frame{position:relative;width:min(280px,70%);aspect-ratio:4/5;border-radius:200px 200px 18px 18px;overflow:hidden;
+  border:3px solid var(--gold);outline:6px solid var(--ivory);box-shadow:0 0 0 8px var(--gold-soft),0 18px 40px rgba(107,21,35,.3)}
+.couple-frame img{width:100%;height:100%;object-fit:cover;object-position:center 22%;transition:transform 1.4s}
+.couple-frame:hover img{transform:scale(1.08)}
+.couple-frame::before,.couple-frame::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:url(assets/floral.png) top left/45% no-repeat}
+.couple-frame::after{background-position:bottom right;transform:rotate(180deg)}
+
+sup{font-size:.6em;line-height:0;vertical-align:super;text-transform:lowercase;letter-spacing:.02em;margin-left:1px}
+
+/* music button */
+.music{position:fixed;z-index:10;top:max(12px,env(safe-area-inset-top));right:12px;width:44px;height:44px;border-radius:50%;
+  background:rgba(255,250,240,.9);border:1px solid var(--gold);box-shadow:0 4px 14px rgba(107,21,35,.2);display:grid;place-items:center}
+.bars{display:flex;align-items:flex-end;gap:3px;height:16px}
+.bars i{width:3px;height:100%;background:var(--maroon);border-radius:2px;transform-origin:bottom;animation:eq 1s ease-in-out infinite}
+.bars i:nth-child(2){animation-delay:.25s}.bars i:nth-child(3){animation-delay:.5s}
+@keyframes eq{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+.music.off .bars i{animation:none;transform:scaleY(.25);background:var(--gold)}
+
+/* wedding page: celebration extras */
+.ring{position:absolute;top:2%;left:50%;width:min(130vw,820px);aspect-ratio:1;margin-left:calc(min(130vw,820px)/-2);opacity:.22;pointer-events:none;
+  background:url(assets/mandala.png) center/contain no-repeat;animation:spin 120s linear infinite}
+#sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.spark{position:absolute;width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:0;animation:twinkle 3s ease-in-out infinite;
+  box-shadow:0 0 8px 2px rgba(217,194,136,.9)}
+@keyframes twinkle{50%{opacity:1;transform:rotate(45deg) scale(1.6)}}
+.diya{display:inline-block;animation:flicker 1.6s ease-in-out infinite}
+@keyframes flicker{50%{transform:scale(1.18);filter:drop-shadow(0 0 6px #f0b44c)}}
+.names.big span{background:linear-gradient(100deg,var(--maroon) 30%,#d4af5f 50%,var(--maroon) 70%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite}
+@keyframes shine{to{background-position:-220% 0}}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,2vw,14px);width:min(100%,440px)}
+.cd{padding:10px 4px;border:1px solid var(--gold);border-radius:14px;background:#fffaf0;box-shadow:0 6px 16px rgba(107,21,35,.1)}
+.cd b{display:block;font-family:var(--serif);font-size:clamp(1.6rem,7vw,2.3rem);color:var(--maroon);line-height:1.1;font-variant-numeric:tabular-nums}
+.cd span{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.cd:last-child b{animation:beat 1s ease-in-out infinite}
+@keyframes beat{50%{transform:scale(1.12)}}
+.live{grid-column:1/-1;font-family:var(--serif);font-size:1.6rem;color:var(--maroon)}
+.invite{letter-spacing:.14em;max-width:30ch;line-height:1.7}
+.quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,4.5vw,1.45rem);color:var(--maroon);max-width:32ch;line-height:1.5}
+#confetti{position:fixed;inset:0;z-index:6;pointer-events:none;overflow:hidden}
+.confetti{position:absolute;top:-20px;width:9px;height:14px;opacity:.9;animation:conf linear forwards}
+@keyframes conf{to{transform:translate3d(var(--dx),110vh,0) rotate(720deg);opacity:.7}}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}.rise,.ev{opacity:1;transform:none}}
